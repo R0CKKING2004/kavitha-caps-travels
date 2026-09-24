@@ -1,0 +1,1074 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kavitha CAPS Travels</title>
+
+    <meta
+        name="description"
+        content="Kavitha CAPS Travels - Tour packages, vehicle rental and comfortable travel services."
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'website/css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <a
+        href="#home"
+        class="logo"
+    >
+        <img
+            src="{% static 'website/images/kavitha-logo.png' %}"
+            alt="Kavitha CAPS Travels"
+        >
+    </a>
+
+
+    <nav
+        class="nav-links"
+        id="navLinks"
+    >
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#services">
+            Services
+        </a>
+
+        <a href="#packages">
+            Packages
+        </a>
+
+        <a href="#vehicles">
+            Vehicles
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </nav>
+
+
+    <button
+        class="menu-btn"
+        id="menuBtn"
+        type="button"
+        aria-label="Open navigation menu"
+    >
+        ☰
+    </button>
+
+
+    <a
+        href="#contact"
+        class="book-btn"
+    >
+        Book Now
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-content">
+
+        <p class="hero-label">
+            TRAVEL • EXPLORE • EXPERIENCE
+        </p>
+
+
+        <h1>
+            Your Journey
+            <br>
+            Starts Here
+        </h1>
+
+
+        <p class="hero-description">
+            Discover beautiful destinations,
+            comfortable journeys and memorable
+            experiences with Kavitha CAPS Travels.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#packages"
+                class="primary-btn"
+            >
+                Explore Tours
+            </a>
+
+
+            <a
+                href="#contact"
+                class="secondary-btn"
+            >
+                Contact Us
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="scroll-indicator">
+
+        <span></span>
+
+        Scroll to explore
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="intro">
+
+    <div class="section-container">
+
+        <p class="section-label">
+            WELCOME TO KAVITHA CAPS
+        </p>
+
+
+        <h2>
+            Travel beyond
+            <br>
+            destinations.
+        </h2>
+
+
+        <p class="intro-text">
+            Whether you are planning a family vacation,
+            a group trip, a business journey or a special
+            getaway, Kavitha CAPS Travels helps make every
+            journey comfortable and memorable.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section
+    class="services section-light"
+    id="services"
+>
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    WHAT WE OFFER
+                </p>
+
+
+                <h2>
+                    Travel made simple.
+                </h2>
+
+            </div>
+
+
+            <p>
+                Flexible travel solutions designed around
+                your journey and your comfort.
+            </p>
+
+        </div>
+
+
+
+        <div class="service-grid">
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    01
+                </div>
+
+                <h3>
+                    Tour Packages
+                </h3>
+
+                <p>
+                    Explore destinations with carefully
+                    planned travel packages for families
+                    and groups.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    02
+                </div>
+
+                <h3>
+                    Vehicle Rental
+                </h3>
+
+                <p>
+                    Comfortable vehicles for local travel,
+                    outstation trips and group journeys.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    03
+                </div>
+
+                <h3>
+                    Corporate Travel
+                </h3>
+
+                <p>
+                    Convenient transportation solutions
+                    for business meetings, events and
+                    company travel.
+                </p>
+
+            </div>
+
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    04
+                </div>
+
+                <h3>
+                    Custom Trips
+                </h3>
+
+                <p>
+                    Create a journey around your schedule,
+                    destination and travel requirements.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PACKAGES
+===================================================== -->
+
+<section
+    class="packages"
+    id="packages"
+>
+
+    <div class="section-container">
+
+
+        <div class="section-heading light-heading">
+
+            <div>
+
+                <p class="section-label">
+                    POPULAR DESTINATIONS
+                </p>
+
+
+                <h2>
+                    Explore your
+                    <br>
+                    next journey.
+                </h2>
+
+            </div>
+
+
+            <p>
+                Discover beautiful destinations across
+                South India with comfortable travel
+                arranged around your plans.
+            </p>
+
+        </div>
+
+
+
+        <div class="package-grid">
+
+
+            {% for package in packages %}
+
+
+            <div class="package-card">
+
+
+                {% if package.image %}
+
+                <div class="package-image">
+
+                    <img
+                        src="{{ package.image.url }}"
+                        alt="{{ package.name }}"
+                    >
+
+                </div>
+
+                {% endif %}
+
+
+
+                <div class="package-content">
+
+                    <span>
+                        {{ package.location }}
+                    </span>
+
+
+                    <h3>
+                        {{ package.name }}
+                    </h3>
+
+
+                    <p>
+                        {{ package.description }}
+                    </p>
+
+
+                    <div class="package-details">
+
+                        <span>
+                            {{ package.duration }}
+                        </span>
+
+
+                        <strong>
+                            ₹{{ package.price }}
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        href="#contact"
+                        class="package-btn"
+                        data-package="{{ package.name }}"
+                    >
+                        Plan this trip →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+
+            <div class="empty-packages">
+
+                <p>
+                    No travel packages available.
+                </p>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VEHICLES
+===================================================== -->
+
+<section
+    class="vehicles section-light"
+    id="vehicles"
+>
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    OUR FLEET
+                </p>
+
+
+                <h2>
+                    Travel in
+                    <br>
+                    comfort.
+                </h2>
+
+            </div>
+
+
+            <p>
+                Choose the right vehicle for your family,
+                group or business journey.
+            </p>
+
+        </div>
+
+
+
+        <div class="vehicle-grid">
+
+
+            <!-- CAR -->
+
+            <div class="vehicle-card">
+
+                <div class="vehicle-image">
+
+                    <img
+                        src="{% static 'website/images/car.jpg' %}"
+                        alt="Car"
+                    >
+
+                </div>
+
+
+                <div class="vehicle-content">
+
+                    <span class="vehicle-number">
+                        01
+                    </span>
+
+
+                    <h3>
+                        Car
+                    </h3>
+
+
+                    <p>
+                        Comfortable and convenient travel
+                        for small families and personal
+                        journeys.
+                    </p>
+
+
+                    <a
+                        href="#contact"
+                        class="vehicle-btn"
+                    >
+                        Enquire Now →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TEMPO TRAVELLER -->
+
+            <div class="vehicle-card">
+
+                <div class="vehicle-image">
+
+                    <img
+                        src="{% static 'website/images/tempo.jpg' %}"
+                        alt="Tempo Traveller"
+                    >
+
+                </div>
+
+
+                <div class="vehicle-content">
+
+                    <span class="vehicle-number">
+                        02
+                    </span>
+
+
+                    <h3>
+                        Tempo Traveller
+                    </h3>
+
+
+                    <p>
+                        Spacious and comfortable transportation
+                        for families, friends and group trips.
+                    </p>
+
+
+                    <a
+                        href="#contact"
+                        class="vehicle-btn"
+                    >
+                        Enquire Now →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOURIST BUS -->
+
+            <div class="vehicle-card">
+
+                <div class="vehicle-image">
+
+                    <img
+                        src="{% static 'website/images/bus.jpg' %}"
+                        alt="Tourist Bus"
+                    >
+
+                </div>
+
+
+                <div class="vehicle-content">
+
+                    <span class="vehicle-number">
+                        03
+                    </span>
+
+
+                    <h3>
+                        Tourist Bus
+                    </h3>
+
+
+                    <p>
+                        Comfortable group transportation
+                        for tours, events and long-distance
+                        journeys.
+                    </p>
+
+
+                    <a
+                        href="#contact"
+                        class="vehicle-btn"
+                    >
+                        Enquire Now →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+    class="about"
+    id="about"
+>
+
+
+    <div class="about-image">
+
+        <img
+            src="{% static 'website/images/tempo.jpg' %}"
+            alt="Kavitha CAPS Travels"
+        >
+
+    </div>
+
+
+
+    <div class="about-content">
+
+        <p class="section-label">
+            ABOUT US
+        </p>
+
+
+        <h2>
+            Every journey deserves
+            a good story.
+        </h2>
+
+
+        <p>
+            At Kavitha CAPS Travels, we focus on making
+            travel comfortable, convenient and enjoyable.
+        </p>
+
+
+        <p>
+            From planning your trip to reaching your
+            destination, our goal is to provide a smooth
+            travel experience.
+        </p>
+
+
+        <a
+            href="#contact"
+            class="dark-btn"
+        >
+            Start Your Journey
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT / ENQUIRY
+===================================================== -->
+
+<section
+    class="contact-section"
+    id="contact"
+>
+
+
+    {% if messages %}
+
+    <div class="messages-container">
+
+        {% for message in messages %}
+
+        <div class="success-message">
+            {{ message }}
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+
+    <div class="contact-container">
+
+        <p class="section-label">
+            PLAN YOUR JOURNEY
+        </p>
+
+
+        <h2>
+            Tell us about your trip.
+        </h2>
+
+
+        <p>
+            Fill in your travel details and our team
+            will get in touch with you.
+        </p>
+
+
+
+        <form
+            method="POST"
+            class="enquiry-form"
+        >
+
+            {% csrf_token %}
+
+
+
+            {% if form.non_field_errors %}
+
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+
+            {% endif %}
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label
+                        for="{{ form.name.id_for_label }}"
+                    >
+                        Your Name
+                    </label>
+
+
+                    {{ form.name }}
+
+
+                    {% if form.name.errors %}
+
+                    <div class="form-error">
+                        {{ form.name.errors }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label
+                        for="{{ form.phone.id_for_label }}"
+                    >
+                        Phone Number
+                    </label>
+
+
+                    {{ form.phone }}
+
+
+                    {% if form.phone.errors %}
+
+                    <div class="form-error">
+                        {{ form.phone.errors }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label
+                        for="{{ form.email.id_for_label }}"
+                    >
+                        Email
+                    </label>
+
+
+                    {{ form.email }}
+
+
+                    {% if form.email.errors %}
+
+                    <div class="form-error">
+                        {{ form.email.errors }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label
+                        for="{{ form.destination.id_for_label }}"
+                    >
+                        Destination
+                    </label>
+
+
+                    {{ form.destination }}
+
+
+                    {% if form.destination.errors %}
+
+                    <div class="form-error">
+                        {{ form.destination.errors }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label
+                        for="{{ form.travel_date.id_for_label }}"
+                    >
+                        Travel Date
+                    </label>
+
+
+                    {{ form.travel_date }}
+
+
+                    {% if form.travel_date.errors %}
+
+                    <div class="form-error">
+                        {{ form.travel_date.errors }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label
+                        for="{{ form.travellers.id_for_label }}"
+                    >
+                        Number of Travellers
+                    </label>
+
+
+                    {{ form.travellers }}
+
+
+                    {% if form.travellers.errors %}
+
+                    <div class="form-error">
+                        {{ form.travellers.errors }}
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label
+                    for="{{ form.vehicle.id_for_label }}"
+                >
+                    Vehicle
+                </label>
+
+
+                {{ form.vehicle }}
+
+
+                {% if form.vehicle.errors %}
+
+                <div class="form-error">
+                    {{ form.vehicle.errors }}
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label
+                    for="{{ form.message.id_for_label }}"
+                >
+                    Message
+                </label>
+
+
+                {{ form.message }}
+
+
+                {% if form.message.errors %}
+
+                <div class="form-error">
+                    {{ form.message.errors }}
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Send Enquiry →
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+
+    <div class="footer-logo">
+
+        <img
+            src="{% static 'website/images/kavitha-logo.png' %}"
+            alt="Kavitha CAPS Travels"
+        >
+
+    </div>
+
+
+    <p>
+        © 2026 Kavitha CAPS Travels.
+        All rights reserved.
+    </p>
+
+
+    <div class="footer-links">
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#services">
+            Services
+        </a>
+
+        <a href="#packages">
+            Packages
+        </a>
+
+        <a href="#vehicles">
+            Vehicles
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+    href="https://wa.me/919360241362"
+    class="whatsapp-btn"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contact Kavitha CAPS Travels on WhatsApp"
+>
+    WhatsApp
+</a>
+
+
+
+<script src="{% static 'website/js/script.js' %}"></script>
+
+
+</body>
+
+</html>
