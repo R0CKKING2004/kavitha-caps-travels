@@ -1,0 +1,1387 @@
+/* =====================================================
+   KAVITHA CAPS TRAVELS
+   MAIN WEBSITE CSS
+===================================================== */
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #171717;
+    background: #ffffff;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 105px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    z-index: 1000;
+
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* LOGO */
+
+.logo {
+    position: relative;
+    z-index: 2;
+}
+
+.logo img {
+    width: 188px;
+    height: auto;
+}
+
+
+/* NAVIGATION */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+.nav-links a {
+    font-size: 16px;
+    font-weight: 600;
+    color: #181818;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #c89b3c;
+}
+
+
+/* BOOK BUTTON */
+
+.book-btn {
+    background: #171717;
+    color: #ffffff;
+
+    padding: 17px 28px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+.book-btn:hover {
+    background: #c89b3c;
+}
+
+
+/* MOBILE MENU BUTTON */
+
+.menu-btn {
+    display: none;
+
+    background: transparent;
+    border: none;
+
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    position: relative;
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 150px 8% 80px;
+
+    background-image: url("../images/hero.11b8893e23d1.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #ffffff;
+}
+
+
+/* HERO OVERLAY */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.52) 42%,
+            rgba(0, 0, 0, 0.15) 75%,
+            rgba(0, 0, 0, 0.08) 100%
+        );
+
+    z-index: 1;
+}
+
+
+/* HERO CONTENT */
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 720px;
+}
+
+
+.hero-label {
+    color: #d5ad55;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 25px;
+}
+
+
+.hero h1 {
+    font-size: clamp(55px, 7vw, 100px);
+
+    line-height: 0.98;
+
+    font-weight: 800;
+
+    letter-spacing: -4px;
+
+    margin-bottom: 35px;
+}
+
+
+.hero-description {
+    max-width: 620px;
+
+    font-size: 19px;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    margin-bottom: 38px;
+}
+
+
+/* HERO BUTTONS */
+
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+
+.primary-btn {
+    display: inline-block;
+
+    background: #cda247;
+
+    color: #ffffff;
+
+    padding: 17px 32px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+.primary-btn:hover {
+    background: #ffffff;
+    color: #171717;
+}
+
+
+.secondary-btn {
+    display: inline-block;
+
+    padding: 16px 32px;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+.secondary-btn:hover {
+    background: #ffffff;
+    color: #171717;
+}
+
+
+/* SCROLL INDICATOR */
+
+.scroll-indicator {
+    position: absolute;
+
+    z-index: 2;
+
+    bottom: 35px;
+    right: 8%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.8;
+}
+
+.scroll-indicator span {
+    width: 35px;
+    height: 1px;
+
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   COMMON SECTION
+===================================================== */
+
+.section-container {
+    width: 84%;
+
+    max-width: 1400px;
+
+    margin: auto;
+}
+
+
+.section-label {
+    color: #c49a3a;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 18px;
+}
+
+
+.section-light {
+    background: #f6f5f2;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro {
+    padding: 130px 0;
+
+    background: #ffffff;
+}
+
+
+.intro h2 {
+    font-size: clamp(45px, 6vw, 78px);
+
+    line-height: 1.02;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 35px;
+}
+
+
+.intro-text {
+    max-width: 760px;
+
+    font-size: 20px;
+
+    color: #666666;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.section-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 50px;
+
+    margin-bottom: 70px;
+}
+
+
+.section-heading h2 {
+    font-size: clamp(42px, 5vw, 68px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+
+.section-heading > p {
+    max-width: 430px;
+
+    color: #666666;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   SERVICES
+===================================================== */
+
+.services {
+    padding: 120px 0;
+}
+
+
+.service-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+
+.service-card {
+    background: #ffffff;
+
+    padding: 38px 30px;
+
+    min-height: 270px;
+
+    border: 1px solid #e8e6e1;
+
+    transition: 0.35s ease;
+}
+
+
+.service-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+.service-number {
+    color: #c49a3a;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin-bottom: 55px;
+}
+
+
+.service-card h3 {
+    font-size: 23px;
+
+    margin-bottom: 15px;
+}
+
+
+.service-card p {
+    color: #6c6c6c;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   PACKAGES
+===================================================== */
+
+.packages {
+    padding: 120px 0;
+
+    background: #181818;
+
+    color: #ffffff;
+}
+
+
+.light-heading .section-label {
+    color: #d3aa51;
+}
+
+
+.light-heading h2 {
+    color: #ffffff;
+}
+
+
+.light-heading > p {
+    color: #bdbdbd;
+}
+
+
+.package-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+.package-card {
+    background: #242424;
+
+    overflow: hidden;
+
+    border: 1px solid #333333;
+
+    transition: 0.35s ease;
+}
+
+
+.package-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #c49a3a;
+}
+
+
+.package-image {
+    width: 100%;
+    height: 250px;
+
+    overflow: hidden;
+}
+
+
+.package-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: 0.5s ease;
+}
+
+
+.package-card:hover .package-image img {
+    transform: scale(1.05);
+}
+
+
+.package-content {
+    padding: 30px;
+}
+
+
+.package-content > span {
+    color: #cda247;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+.package-content h3 {
+    font-size: 27px;
+
+    margin: 10px 0 15px;
+}
+
+
+.package-content p {
+    color: #bdbdbd;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+
+.package-details {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-top: 20px;
+
+    margin-bottom: 25px;
+
+    border-top: 1px solid #3b3b3b;
+}
+
+
+.package-details span {
+    color: #aaaaaa;
+
+    font-size: 14px;
+}
+
+
+.package-details strong {
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+
+.package-btn {
+    display: inline-block;
+
+    color: #d2a648;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    transition: 0.3s ease;
+}
+
+
+.package-btn:hover {
+    color: #ffffff;
+}
+
+
+.empty-packages {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 50px;
+
+    color: #bbbbbb;
+}
+
+
+/* =====================================================
+   VEHICLES
+===================================================== */
+
+.vehicles {
+    padding: 120px 0;
+
+    background: #f6f5f2;
+}
+
+
+/*
+   IMPORTANT:
+   All vehicle images use exactly the same box size.
+*/
+
+.vehicle-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+.vehicle-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e3df;
+
+    overflow: hidden;
+
+    transition: 0.35s ease;
+}
+
+
+.vehicle-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.09);
+}
+
+
+/* VEHICLE IMAGE BOX */
+
+.vehicle-image {
+    width: 100%;
+
+    height: 300px;
+
+    overflow: hidden;
+
+    background: #eeeeee;
+}
+
+
+/* VEHICLE IMAGE */
+
+.vehicle-image img {
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* VEHICLE CONTENT */
+
+.vehicle-content {
+    padding: 30px;
+}
+
+
+.vehicle-number {
+    color: #c49a3a;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.vehicle-content h3 {
+    font-size: 28px;
+
+    margin: 10px 0 15px;
+}
+
+
+.vehicle-content p {
+    color: #686868;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+
+.vehicle-btn {
+    color: #171717;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    transition: 0.3s ease;
+}
+
+
+.vehicle-btn:hover {
+    color: #c49a3a;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    min-height: 650px;
+}
+
+
+.about-image {
+    min-height: 550px;
+
+    overflow: hidden;
+}
+
+
+.about-image img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+.about-content {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 80px 10%;
+
+    background: #e9e5dc;
+}
+
+
+.about-content h2 {
+    font-size: clamp(42px, 5vw, 68px);
+
+    line-height: 1.02;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 30px;
+}
+
+
+.about-content p {
+    max-width: 570px;
+
+    color: #606060;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-bottom: 18px;
+}
+
+
+.dark-btn {
+    display: inline-block;
+
+    width: fit-content;
+
+    margin-top: 20px;
+
+    padding: 16px 28px;
+
+    background: #171717;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+
+.dark-btn:hover {
+    background: #c49a3a;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.contact-section {
+    padding: 120px 0;
+
+    background: #ffffff;
+}
+
+
+.messages-container {
+    width: 84%;
+
+    max-width: 900px;
+
+    margin: 0 auto 40px;
+}
+
+
+.success-message {
+    padding: 18px 22px;
+
+    background: #e8f7e8;
+
+    border-left: 4px solid #3b9c45;
+
+    color: #246b2c;
+
+    font-weight: 600;
+}
+
+
+.contact-container {
+    width: 84%;
+
+    max-width: 900px;
+
+    margin: auto;
+}
+
+
+.contact-container h2 {
+    font-size: clamp(42px, 5vw, 68px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 25px;
+}
+
+
+.contact-container > p:not(.section-label) {
+    color: #666666;
+
+    font-size: 17px;
+
+    margin-bottom: 50px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.enquiry-form {
+    width: 100%;
+}
+
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+}
+
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #242424;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 16px 17px;
+
+    border: 1px solid #d8d8d8;
+
+    background: #fafafa;
+
+    color: #222222;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #c49a3a;
+
+    background: #ffffff;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 130px;
+}
+
+
+.submit-btn {
+    border: none;
+
+    background: #171717;
+
+    color: #ffffff;
+
+    padding: 18px 35px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+
+.submit-btn:hover {
+    background: #c49a3a;
+}
+
+
+/* FORM ERRORS */
+
+.form-error {
+    margin-top: 6px;
+
+    color: #c62828;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    padding: 55px 7%;
+
+    background: #151515;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.footer-logo img {
+    width: 160px;
+
+    height: auto;
+}
+
+
+.footer p {
+    color: #999999;
+
+    font-size: 13px;
+}
+
+
+.footer-links {
+    display: flex;
+
+    gap: 25px;
+}
+
+
+.footer-links a {
+    color: #cccccc;
+
+    font-size: 13px;
+
+    transition: 0.3s ease;
+}
+
+
+.footer-links a:hover {
+    color: #d0a64c;
+}
+
+
+/* =====================================================
+   WHATSAPP BUTTON
+===================================================== */
+
+.whatsapp-btn {
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    z-index: 999;
+
+    background: #25d366;
+
+    color: #ffffff;
+
+    padding: 15px 22px;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+
+    transition: 0.3s ease;
+}
+
+
+.whatsapp-btn:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        height: 90px;
+
+        padding: 0 5%;
+    }
+
+
+    .logo img {
+        width: 155px;
+    }
+
+
+    .nav-links {
+        position: absolute;
+
+        top: 90px;
+
+        left: 0;
+
+        width: 100%;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 0;
+
+        background: #ffffff;
+
+        padding: 20px 5%;
+
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+
+    .nav-links.active {
+        display: flex;
+    }
+
+
+    .nav-links a {
+        width: 100%;
+
+        padding: 15px 0;
+
+        border-bottom: 1px solid #eeeeee;
+    }
+
+
+    .menu-btn {
+        display: block;
+    }
+
+
+    .book-btn {
+        display: none;
+    }
+
+
+    .hero {
+        padding: 130px 7% 80px;
+
+        background-position: center;
+    }
+
+
+    .hero h1 {
+        font-size: 65px;
+    }
+
+
+    .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .package-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .vehicle-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+
+    .about-image {
+        min-height: 450px;
+    }
+
+
+    .section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .footer {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .section-container {
+        width: 90%;
+    }
+
+
+    .navbar {
+        height: 80px;
+    }
+
+
+    .nav-links {
+        top: 80px;
+    }
+
+
+    .logo img {
+        width: 140px;
+    }
+
+
+    .hero {
+        min-height: 100vh;
+
+        padding: 120px 6% 80px;
+
+        background-position: center;
+    }
+
+
+    .hero h1 {
+        font-size: 52px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+
+    .hero-buttons {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        width: 100%;
+    }
+
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+    .scroll-indicator {
+        display: none;
+    }
+
+
+    .intro,
+    .services,
+    .packages,
+    .vehicles,
+    .contact-section {
+        padding: 80px 0;
+    }
+
+
+    .intro h2,
+    .section-heading h2,
+    .about-content h2,
+    .contact-container h2 {
+        font-size: 44px;
+    }
+
+
+    .service-grid,
+    .package-grid,
+    .vehicle-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* MOBILE VEHICLE IMAGE */
+
+    .vehicle-image {
+        height: 250px;
+    }
+
+
+    .package-image {
+        height: 230px;
+    }
+
+
+    .about-image {
+        min-height: 350px;
+    }
+
+
+    .about-content {
+        padding: 70px 7%;
+    }
+
+
+    .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .footer-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .whatsapp-btn {
+        right: 15px;
+
+        bottom: 15px;
+
+        padding: 13px 18px;
+    }
+
+}
