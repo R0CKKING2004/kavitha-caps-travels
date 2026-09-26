@@ -1,0 +1,20 @@
+﻿services:
+  - type: web
+    name: kavitha-travels
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn kavitha_travels.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kavitha-travels-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+
+databases:
+  - name: kavitha-travels-db
+    databaseName: kavitha_travels
+    user: kavitha_travels
