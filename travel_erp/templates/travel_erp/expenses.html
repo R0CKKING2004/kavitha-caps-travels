@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses - Kavitha Travels</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            background: #dc3545;
+        }
+
+        .dashboard {
+            background: #6c757d;
+            margin-right: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f3f5;
+        }
+
+        .edit-btn {
+            background: #0d6efd;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            border: none;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .message {
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>Expenses</h1>
+
+        <div>
+
+            <a href="{% url 'erp_dashboard' %}"
+               class="btn dashboard">
+                Dashboard
+            </a>
+
+            <a href="{% url 'add_expense' %}"
+               class="btn">
+                + Add Expense
+            </a>
+
+        </div>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="card">
+
+        <div class="total">
+            Total Expenses:
+            ₹{{ total_expenses|default:"0" }}
+        </div>
+
+
+        {% if expenses %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for expense in expenses %}
+
+                <tr>
+
+                    <td>
+                        #{{ expense.id }}
+                    </td>
+
+                    <td>
+                        {{ expense.title }}
+                    </td>
+
+                    <td>
+                        {{ expense.category }}
+                    </td>
+
+                    <td>
+                        ₹{{ expense.amount }}
+                    </td>
+
+                    <td>
+                        {{ expense.expense_date|date:"d-m-Y" }}
+                    </td>
+
+                    <td>
+                        {{ expense.description|default:"-" }}
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'edit_expense' expense.id %}"
+                           class="edit-btn">
+                            Edit
+                        </a>
+
+
+                        <form
+                            method="POST"
+                            action="{% url 'delete_expense' expense.id %}"
+                            style="display:inline;"
+                            onsubmit="return confirm('Delete this expense?');"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="delete-btn">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+            No expenses found.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

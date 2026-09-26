@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Expense - Kavitha Travels</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 13px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #bb2d3b;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'erp_expenses' %}" class="back">
+        ← Back to Expenses
+    </a>
+
+    <h2>Add Expense</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Expense Title</label>
+
+        <input
+            type="text"
+            name="title"
+            placeholder="Example: Diesel"
+            required
+        >
+
+
+        <label>Category</label>
+
+        <select name="category" required>
+
+            <option value="">
+                Select Category
+            </option>
+
+            <option value="Fuel">
+                Fuel
+            </option>
+
+            <option value="Maintenance">
+                Maintenance
+            </option>
+
+            <option value="Salary">
+                Salary
+            </option>
+
+            <option value="Office">
+                Office
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+
+        <label>Amount</label>
+
+        <input
+            type="number"
+            name="amount"
+            step="0.01"
+            min="0"
+            placeholder="Enter expense amount"
+            required
+        >
+
+
+        <label>Expense Date</label>
+
+        <input
+            type="date"
+            name="expense_date"
+            required
+        >
+
+
+        <label>Description</label>
+
+        <textarea
+            name="description"
+            placeholder="Enter expense details"
+        ></textarea>
+
+
+        <button type="submit">
+            Add Expense
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

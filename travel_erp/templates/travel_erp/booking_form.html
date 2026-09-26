@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% if booking %}
+            Edit Booking
+        {% else %}
+            New Booking
+        {% endif %}
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        button,
+        a {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 7px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+        }
+
+        .cancel {
+            background: #64748b;
+            color: white;
+        }
+
+        @media(max-width: 700px) {
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .container {
+                margin: 15px;
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>
+        KAVITHA CAPS
+    </h1>
+
+</div>
+
+
+<div class="container">
+
+
+    <h2>
+
+        {% if booking %}
+            Edit Booking
+        {% else %}
+            New Booking
+        {% endif %}
+
+    </h2>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <div class="grid">
+
+
+            <!-- CUSTOMER -->
+
+            <div>
+
+                <label>
+                    Customer
+                </label>
+
+                <select
+                    name="customer"
+                    required
+                >
+
+                    <option value="">
+                        Select Customer
+                    </option>
+
+
+                    {% for customer in customers %}
+
+                    <option
+                        value="{{ customer.id }}"
+
+                        {% if booking.customer.id == customer.id %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ customer.name }}
+                        - {{ customer.phone }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- PACKAGE -->
+
+            <div>
+
+                <label>
+                    Package
+                </label>
+
+                <select
+                    name="package"
+                >
+
+                    <option value="">
+                        Select Package
+                    </option>
+
+
+                    {% for package in packages %}
+
+                    <option
+                        value="{{ package.id }}"
+
+                        {% if booking.package.id == package.id %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ package.name }}
+                        - ₹{{ package.price }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- TRAVEL DATE -->
+
+            <div>
+
+                <label>
+                    Travel Date
+                </label>
+
+                <input
+                    type="date"
+                    name="travel_date"
+                    value="{{ booking.travel_date|date:'Y-m-d' }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- RETURN DATE -->
+
+            <div>
+
+                <label>
+                    Return Date
+                </label>
+
+                <input
+                    type="date"
+                    name="return_date"
+                    value="{{ booking.return_date|date:'Y-m-d' }}"
+                >
+
+            </div>
+
+
+            <!-- TRAVELLERS -->
+
+            <div>
+
+                <label>
+                    Number of Travellers
+                </label>
+
+                <input
+                    type="number"
+                    name="travellers"
+                    min="1"
+                    value="{{ booking.travellers|default:'1' }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- VEHICLE -->
+
+            <div>
+
+                <label>
+                    Vehicle
+                </label>
+
+                <select
+                    name="vehicle"
+                    required
+                >
+
+                    <option value="">
+                        Select Vehicle
+                    </option>
+
+                    <option
+                        value="Car"
+
+                        {% if booking.vehicle == "Car" %}
+                            selected
+                        {% endif %}
+                    >
+                        Car
+                    </option>
+
+                    <option
+                        value="Tempo Traveller"
+
+                        {% if booking.vehicle == "Tempo Traveller" %}
+                            selected
+                        {% endif %}
+                    >
+                        Tempo Traveller
+                    </option>
+
+                    <option
+                        value="Tourist Bus"
+
+                        {% if booking.vehicle == "Tourist Bus" %}
+                            selected
+                        {% endif %}
+                    >
+                        Tourist Bus
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div>
+
+                <label>
+                    Total Amount
+                </label>
+
+                <input
+                    type="number"
+                    name="total_amount"
+                    step="0.01"
+                    min="0"
+                    value="{{ booking.total_amount|default:'0' }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ADVANCE -->
+
+            <div>
+
+                <label>
+                    Advance Amount
+                </label>
+
+                <input
+                    type="number"
+                    name="advance_amount"
+                    step="0.01"
+                    min="0"
+                    value="{{ booking.advance_amount|default:'0' }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BOOKING STATUS -->
+
+            <div>
+
+                <label>
+                    Booking Status
+                </label>
+
+                <select
+                    name="booking_status"
+                >
+
+                    <option
+                        value="Pending"
+
+                        {% if booking.booking_status == "Pending" %}
+                            selected
+                        {% endif %}
+                    >
+                        Pending
+                    </option>
+
+                    <option
+                        value="Confirmed"
+
+                        {% if booking.booking_status == "Confirmed" %}
+                            selected
+                        {% endif %}
+                    >
+                        Confirmed
+                    </option>
+
+                    <option
+                        value="Cancelled"
+
+                        {% if booking.booking_status == "Cancelled" %}
+                            selected
+                        {% endif %}
+                    >
+                        Cancelled
+                    </option>
+
+                    <option
+                        value="Completed"
+
+                        {% if booking.booking_status == "Completed" %}
+                            selected
+                        {% endif %}
+                    >
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PAYMENT STATUS -->
+
+            <div>
+
+                <label>
+                    Payment Status
+                </label>
+
+                <select
+                    name="payment_status"
+                >
+
+                    <option
+                        value="Pending"
+
+                        {% if booking.payment_status == "Pending" %}
+                            selected
+                        {% endif %}
+                    >
+                        Pending
+                    </option>
+
+                    <option
+                        value="Partial"
+
+                        {% if booking.payment_status == "Partial" %}
+                            selected
+                        {% endif %}
+                    >
+                        Partial
+                    </option>
+
+                    <option
+                        value="Paid"
+
+                        {% if booking.payment_status == "Paid" %}
+                            selected
+                        {% endif %}
+                    >
+                        Paid
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- NOTES -->
+
+            <div class="full">
+
+                <label>
+                    Notes
+                </label>
+
+                <textarea
+                    name="notes"
+                    placeholder="Additional booking notes..."
+                >{{ booking.notes|default:'' }}</textarea>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button type="submit">
+
+                {% if booking %}
+                    Update Booking
+                {% else %}
+                    Save Booking
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'erp_bookings' %}"
+                class="cancel"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

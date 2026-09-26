@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        {% if package %}
+            Edit Package
+        {% else %}
+            Add Package
+        {% endif %}
+    </title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 35px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input[type="file"] {
+            padding: 9px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        button,
+        a {
+            padding: 11px 18px;
+            border-radius: 7px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+        }
+
+        .cancel {
+            background: #64748b;
+            color: white;
+        }
+
+        .current-image {
+            margin-top: 10px;
+            max-width: 200px;
+            border-radius: 8px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>
+        Kavitha CAPS
+    </h1>
+
+</div>
+
+
+<div class="container">
+
+
+    <h2>
+
+        {% if package %}
+            Edit Package
+        {% else %}
+            Add Package
+        {% endif %}
+
+    </h2>
+
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+
+        <label>
+            Package Name
+        </label>
+
+        <input
+            type="text"
+            name="name"
+            value="{{ package.name|default:'' }}"
+            required
+        >
+
+
+        <label>
+            Location
+        </label>
+
+        <input
+            type="text"
+            name="location"
+            value="{{ package.location|default:'' }}"
+            required
+        >
+
+
+        <label>
+            Description
+        </label>
+
+        <textarea
+            name="description"
+            required
+        >{{ package.description|default:'' }}</textarea>
+
+
+        <label>
+            Price
+        </label>
+
+        <input
+            type="number"
+            name="price"
+            step="0.01"
+            value="{{ package.price|default:'' }}"
+            required
+        >
+
+
+        <label>
+            Duration
+        </label>
+
+        <input
+            type="text"
+            name="duration"
+            placeholder="Example: 3 Days / 2 Nights"
+            value="{{ package.duration|default:'' }}"
+            required
+        >
+
+
+        <label>
+            Package Image
+        </label>
+
+        <input
+            type="file"
+            name="image"
+            accept="image/*"
+        >
+
+
+        {% if package.image %}
+
+            <br>
+
+            <img
+                src="{{ package.image.url }}"
+                class="current-image"
+            >
+
+        {% endif %}
+
+
+        <div class="buttons">
+
+            <button type="submit">
+
+                {% if package %}
+                    Update Package
+                {% else %}
+                    Save Package
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'erp_packages' %}"
+                class="cancel"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bookings - Kavitha CAPS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .topbar h1 {
+            margin: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 7px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .dashboard {
+            background: #64748b;
+            color: white;
+        }
+
+        .add {
+            background: #2563eb;
+            color: white;
+        }
+
+        .edit {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .delete {
+            background: #dc2626;
+            color: white;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+        }
+
+        th {
+            background: #f8fafc;
+            text-align: left;
+            padding: 15px;
+            font-size: 13px;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .confirmed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .completed {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .paid {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .partial {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .amount {
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px;
+            color: #64748b;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            background: #dcfce7;
+            color: #166534;
+            padding: 12px 15px;
+            border-radius: 7px;
+            margin-bottom: 8px;
+        }
+
+        @media(max-width:700px) {
+            .header {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h2>
+        KAVITHA CAPS
+    </h2>
+
+    <a
+        href="{% url 'erp_dashboard' %}"
+        class="btn dashboard"
+    >
+        ← Dashboard
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- MESSAGES -->
+
+    {% if messages %}
+
+    <div class="messages">
+
+        {% for message in messages %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <h1>
+            Bookings
+        </h1>
+
+        <a
+            href="{% url 'add_booking' %}"
+            class="btn add"
+        >
+            + Add Booking
+        </a>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="card">
+
+        {% if bookings %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        Customer
+                    </th>
+
+                    <th>
+                        Package
+                    </th>
+
+                    <th>
+                        Travel Date
+                    </th>
+
+                    <th>
+                        Travellers
+                    </th>
+
+                    <th>
+                        Vehicle
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                    <th>
+                        Advance
+                    </th>
+
+                    <th>
+                        Balance
+                    </th>
+
+                    <th>
+                        Booking Status
+                    </th>
+
+                    <th>
+                        Payment
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for booking in bookings %}
+
+                <tr>
+
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            {{ booking.customer.name }}
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            {{ booking.customer.phone }}
+                        </small>
+
+                    </td>
+
+
+                    <td>
+
+                        {% if booking.package %}
+
+                            {{ booking.package.name }}
+
+                        {% else %}
+
+                            No Package
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+                        {{ booking.travel_date|date:"d M Y" }}
+                    </td>
+
+
+                    <td>
+                        {{ booking.travellers }}
+                    </td>
+
+
+                    <td>
+                        {{ booking.vehicle }}
+                    </td>
+
+
+                    <td class="amount">
+                        ₹{{ booking.total_amount }}
+                    </td>
+
+
+                    <td>
+                        ₹{{ booking.advance_amount }}
+                    </td>
+
+
+                    <td class="amount">
+                        ₹{{ booking.balance_amount }}
+                    </td>
+
+
+                    <td>
+
+                        {% if booking.booking_status == "Confirmed" %}
+
+                        <span class="status confirmed">
+                            Confirmed
+                        </span>
+
+                        {% elif booking.booking_status == "Cancelled" %}
+
+                        <span class="status cancelled">
+                            Cancelled
+                        </span>
+
+                        {% elif booking.booking_status == "Completed" %}
+
+                        <span class="status completed">
+                            Completed
+                        </span>
+
+                        {% else %}
+
+                        <span class="status pending">
+                            Pending
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if booking.payment_status == "Paid" %}
+
+                        <span class="status paid">
+                            Paid
+                        </span>
+
+                        {% elif booking.payment_status == "Partial" %}
+
+                        <span class="status partial">
+                            Partial
+                        </span>
+
+                        {% else %}
+
+                        <span class="status pending">
+                            Pending
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <a
+                                href="{% url 'edit_booking' booking.id %}"
+                                class="btn edit"
+                            >
+                                ✏ Edit
+                            </a>
+
+
+                            <a
+                                href="{% url 'delete_booking' booking.id %}"
+                                class="btn delete"
+                                onclick="return confirm('Are you sure you want to delete this booking?');"
+                            >
+                                🗑 Delete
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+
+        {% else %}
+
+        <div class="empty">
+
+            <h2>
+                No bookings found
+            </h2>
+
+            <p>
+                Create your first travel booking.
+            </p>
+
+            <a
+                href="{% url 'add_booking' %}"
+                class="btn add"
+            >
+                + Add Booking
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

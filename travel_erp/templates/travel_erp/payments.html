@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payments - Kavitha Travels</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            background: #198754;
+        }
+
+        .back {
+            background: #6c757d;
+            margin-right: 8px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f3f5;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            border: none;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .message {
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>Payments</h1>
+
+        <div>
+            <a href="{% url 'erp_dashboard' %}" class="btn back">
+                Dashboard
+            </a>
+
+            <a href="{% url 'add_payment' %}" class="btn">
+                + Add Payment
+            </a>
+        </div>
+
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="card">
+
+        <div class="total">
+            Total Payments:
+            ₹{{ total_payments|default:"0" }}
+        </div>
+
+
+        {% if payments %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Booking</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Reference</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for payment in payments %}
+
+                <tr>
+
+                    <td>
+                        #{{ payment.id }}
+                    </td>
+
+                    <td>
+                        {{ payment.booking.customer.name }}
+                    </td>
+
+                    <td>
+                        #{{ payment.booking.id }}
+                    </td>
+
+                    <td>
+                        ₹{{ payment.amount }}
+                    </td>
+
+                    <td>
+                        {{ payment.payment_method }}
+                    </td>
+
+                    <td>
+                        {{ payment.reference_number|default:"-" }}
+                    </td>
+
+                    <td>
+                        {{ payment.payment_date|date:"d-m-Y H:i" }}
+                    </td>
+
+                    <td>
+
+                        <form
+                            method="POST"
+                            action="{% url 'delete_payment' payment.id %}"
+                            onsubmit="return confirm('Delete this payment?');"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="delete-btn"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+            <div class="empty">
+                No payments found.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% if customer %}
+            Edit Customer
+        {% else %}
+            Add Customer
+        {% endif %}
+        - Kavitha Travels
+    </title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #172033;
+            padding: 25px 15px;
+            color: white;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h2 {
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        .menu-title {
+            color: #8e99ad;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin: 20px 12px 8px;
+        }
+
+        .menu a {
+            display: block;
+            text-decoration: none;
+            color: #dce2ec;
+            padding: 12px 14px;
+            margin-bottom: 5px;
+            border-radius: 7px;
+        }
+
+        .menu a:hover {
+            background: #27344d;
+        }
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 18px 30px;
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar h1 {
+            font-size: 24px;
+        }
+
+        .topbar p {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        .admin {
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 9px 15px;
+            border-radius: 20px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-box {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-box h2 {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .save-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .save-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .cancel-btn {
+            text-decoration: none;
+            background: #6b7280;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+        }
+
+        .cancel-btn:hover {
+            background: #4b5563;
+        }
+
+        @media(max-width: 600px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>Kavitha Travels</h2>
+        <p>Travel ERP Management</p>
+    </div>
+
+    <div class="menu-title">
+        Main
+    </div>
+
+    <div class="menu">
+
+        <a href="{% url 'erp_dashboard' %}">
+            🏠 Dashboard
+        </a>
+
+        <a href="{% url 'erp_customers' %}">
+            👥 Customers
+        </a>
+
+        <a href="{% url 'erp_packages' %}">
+            📦 Packages
+        </a>
+
+        <a href="{% url 'erp_bookings' %}">
+            📅 Bookings
+        </a>
+
+        <a href="{% url 'erp_vehicles' %}">
+            🚐 Vehicles
+        </a>
+
+        <a href="{% url 'erp_payments' %}">
+            💳 Payments
+        </a>
+
+        <a href="{% url 'erp_expenses' %}">
+            💰 Expenses
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div>
+            <h1>
+                {% if customer %}
+                    Edit Customer
+                {% else %}
+                    Add Customer
+                {% endif %}
+            </h1>
+
+            <p>
+                Customer management
+            </p>
+        </div>
+
+        <div class="admin">
+            👤 Admin
+        </div>
+
+    </header>
+
+
+    <section class="content">
+
+        <div class="form-box">
+
+            <h2>
+                {% if customer %}
+                    Edit Customer Details
+                {% else %}
+                    Customer Details
+                {% endif %}
+            </h2>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Customer Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="{{ customer.name|default:'' }}"
+                        placeholder="Enter customer name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value="{{ customer.phone|default:'' }}"
+                        placeholder="Enter phone number"
+                        maxlength="15"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{ customer.email|default:'' }}"
+                        placeholder="Enter email address"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="address">
+                        Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter customer address"
+                    >{{ customer.address|default:'' }}</textarea>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        {% if customer %}
+                            Update Customer
+                        {% else %}
+                            Save Customer
+                        {% endif %}
+                    </button>
+
+
+                    <a
+                        href="{% url 'erp_customers' %}"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

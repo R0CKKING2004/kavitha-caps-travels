@@ -16,6 +16,7 @@ class PackageAdmin(admin.ModelAdmin):
     list_filter = (
         'is_active',
         'location',
+        'duration',
     )
 
     search_fields = (
@@ -24,6 +25,54 @@ class PackageAdmin(admin.ModelAdmin):
         'description',
     )
 
+    list_editable = (
+        'price',
+        'is_active',
+    )
+
     ordering = (
         '-created_at',
+    )
+
+    readonly_fields = (
+        'created_at',
+    )
+
+    fieldsets = (
+        (
+            'Package Information',
+            {
+                'fields': (
+                    'name',
+                    'location',
+                    'description',
+                    'duration',
+                )
+            }
+        ),
+        (
+            'Pricing',
+            {
+                'fields': (
+                    'price',
+                )
+            }
+        ),
+        (
+            'Package Image',
+            {
+                'fields': (
+                    'image',
+                )
+            }
+        ),
+        (
+            'Status',
+            {
+                'fields': (
+                    'is_active',
+                    'created_at',
+                )
+            }
+        ),
     )

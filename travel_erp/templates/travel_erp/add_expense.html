@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Expense - Kavitha CAPS</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 7px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .save {
+            background: #2563eb;
+            color: white;
+        }
+
+        .back {
+            background: #64748b;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>KAVITHA CAPS</h2>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Add Expense</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label>Expense Title</label>
+
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Example: Fuel Expense"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Category</label>
+
+                <select name="category" required>
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Fuel">
+                        Fuel
+                    </option>
+
+                    <option value="Food">
+                        Food
+                    </option>
+
+                    <option value="Driver Salary">
+                        Driver Salary
+                    </option>
+
+                    <option value="Vehicle Maintenance">
+                        Vehicle Maintenance
+                    </option>
+
+                    <option value="Office">
+                        Office
+                    </option>
+
+                    <option value="Hotel">
+                        Hotel
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Amount</label>
+
+                <input
+                    type="number"
+                    name="amount"
+                    step="0.01"
+                    min="0"
+                    placeholder="Enter amount"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Expense Date</label>
+
+                <input
+                    type="date"
+                    name="expense_date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    placeholder="Enter expense details"
+                ></textarea>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn save"
+                >
+                    Save Expense
+                </button>
+
+                <a
+                    href="{% url 'erp_expenses' %}"
+                    class="btn back"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

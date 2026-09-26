@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Vehicle - Kavitha CAPS</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px;
+            box-sizing: border-box;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 7px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .save {
+            background: #2563eb;
+            color: white;
+        }
+
+        .back {
+            background: #64748b;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>KAVITHA CAPS</h2>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Edit Vehicle</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Vehicle Number</label>
+
+                <input
+                    type="text"
+                    name="vehicle_number"
+                    value="{{ vehicle.vehicle_number }}"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Vehicle Type</label>
+
+                <select name="vehicle_type" required>
+
+                    <option value="Car"
+                        {% if vehicle.vehicle_type == "Car" %}selected{% endif %}>
+                        Car
+                    </option>
+
+                    <option value="Tempo Traveller"
+                        {% if vehicle.vehicle_type == "Tempo Traveller" %}selected{% endif %}>
+                        Tempo Traveller
+                    </option>
+
+                    <option value="Tourist Bus"
+                        {% if vehicle.vehicle_type == "Tourist Bus" %}selected{% endif %}>
+                        Tourist Bus
+                    </option>
+
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>Vehicle Model</label>
+
+                <input
+                    type="text"
+                    name="model"
+                    value="{{ vehicle.model }}"
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Seating Capacity</label>
+
+                <input
+                    type="number"
+                    name="capacity"
+                    min="1"
+                    value="{{ vehicle.capacity }}"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Driver Name</label>
+
+                <input
+                    type="text"
+                    name="driver_name"
+                    value="{{ vehicle.driver_name }}"
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Driver Phone</label>
+
+                <input
+                    type="text"
+                    name="driver_phone"
+                    maxlength="15"
+                    value="{{ vehicle.driver_phone }}"
+                >
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn save"
+                >
+                    Update Vehicle
+                </button>
+
+                <a
+                    href="{% url 'erp_vehicles' %}"
+                    class="btn back"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

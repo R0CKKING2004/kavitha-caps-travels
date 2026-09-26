@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Payment - Kavitha Travels</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 13px;
+            background: #198754;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #157347;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'erp_payments' %}" class="back">
+        ← Back to Payments
+    </a>
+
+    <h2>Add Payment</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Booking</label>
+
+        <select name="booking" required>
+
+            <option value="">
+                Select Booking
+            </option>
+
+            {% for booking in bookings %}
+
+                <option value="{{ booking.id }}">
+                    #{{ booking.id }}
+                    -
+                    {{ booking.customer.name }}
+                    -
+                    ₹{{ booking.total_amount }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+
+        <label>Amount</label>
+
+        <input
+            type="number"
+            name="amount"
+            step="0.01"
+            min="0"
+            placeholder="Enter payment amount"
+            required
+        >
+
+
+        <label>Payment Method</label>
+
+        <select name="payment_method" required>
+
+            <option value="">
+                Select Method
+            </option>
+
+            <option value="Cash">
+                Cash
+            </option>
+
+            <option value="UPI">
+                UPI
+            </option>
+
+            <option value="Card">
+                Card
+            </option>
+
+            <option value="Bank Transfer">
+                Bank Transfer
+            </option>
+
+        </select>
+
+
+        <label>Reference Number</label>
+
+        <input
+            type="text"
+            name="reference_number"
+            placeholder="UPI / transaction reference"
+        >
+
+
+        <label>Notes</label>
+
+        <textarea
+            name="notes"
+            placeholder="Payment notes"
+        ></textarea>
+
+
+        <button type="submit">
+            Add Payment
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Package - Kavitha CAPS</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .back {
+            background: #64748b;
+            color: white;
+        }
+
+        .save {
+            background: #2563eb;
+            color: white;
+        }
+
+        .cancel {
+            background: #64748b;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-family: Arial;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .current-image {
+            margin-bottom: 15px;
+        }
+
+        .current-image img {
+            width: 220px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .no-image {
+            width: 220px;
+            height: 150px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #e2e8f0;
+            border-radius: 8px;
+            color: #64748b;
+        }
+
+        .preview {
+            display: none;
+
+            width: 220px;
+            height: 150px;
+
+            object-fit: cover;
+
+            margin-top: 15px;
+
+            border-radius: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h2>
+        KAVITHA CAPS
+    </h2>
+
+    <a
+        href="{% url 'erp_packages' %}"
+        class="btn back"
+    >
+        ← Packages
+    </a>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            Edit Travel Package
+        </h1>
+
+        <p class="subtitle">
+            Update package information.
+        </p>
+
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- PACKAGE NAME -->
+
+            <div class="form-group">
+
+                <label>
+                    Package Name
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ package.name }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+                <label>
+                    Location
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    name="location"
+                    value="{{ package.location }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                    <span class="required">*</span>
+                </label>
+
+                <textarea
+                    name="description"
+                    required
+                >{{ package.description }}</textarea>
+
+            </div>
+
+
+            <!-- PRICE -->
+
+            <div class="form-group">
+
+                <label>
+                    Package Price
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="number"
+                    name="price"
+                    value="{{ package.price }}"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DURATION -->
+
+            <div class="form-group">
+
+                <label>
+                    Duration
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    name="duration"
+                    value="{{ package.duration }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CURRENT IMAGE -->
+
+            <div class="form-group">
+
+                <label>
+                    Current Package Image
+                </label>
+
+
+                {% if package.image %}
+
+                <div class="current-image">
+
+                    <img
+                        src="{{ package.image.url }}"
+                        alt="{{ package.name }}"
+                    >
+
+                </div>
+
+                {% else %}
+
+                <div class="no-image">
+                    No Image
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- NEW IMAGE -->
+
+            <div class="form-group">
+
+                <label>
+                    Change Package Image
+                </label>
+
+                <input
+                    type="file"
+                    name="image"
+                    id="imageInput"
+                    accept="image/*"
+                    onchange="previewImage(event)"
+                >
+
+
+                <img
+                    id="imagePreview"
+                    class="preview"
+                >
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn save"
+                >
+                    💾 Update Package
+                </button>
+
+
+                <a
+                    href="{% url 'erp_packages' %}"
+                    class="btn cancel"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function previewImage(event) {
+
+    const preview =
+        document.getElementById(
+            "imagePreview"
+        );
+
+    const file =
+        event.target.files[0];
+
+    if (file) {
+
+        preview.src =
+            URL.createObjectURL(file);
+
+        preview.style.display =
+            "block";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

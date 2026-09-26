@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     'website',
     'packages',
+     'travel_erp',
 ]
 
 

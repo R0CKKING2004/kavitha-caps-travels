@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Packages - Kavitha CAPS</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .top h1 {
+            margin: 0;
+        }
+
+        .top p {
+            color: #64748b;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 10px 16px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .add {
+            background: #2563eb;
+        }
+
+        .back {
+            background: #64748b;
+        }
+
+        .edit {
+            background: #f59e0b;
+        }
+
+        .delete {
+            background: #dc2626;
+        }
+
+        .toggle {
+            background: #16a34a;
+        }
+
+        .inactive {
+            background: #64748b;
+        }
+
+        .search {
+            width: 300px;
+
+            padding: 11px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 7px;
+
+            margin-bottom: 20px;
+        }
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fill, minmax(300px, 1fr));
+
+            gap: 20px;
+        }
+
+        .card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            border: 1px solid #e2e8f0;
+
+            transition: .2s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,.08);
+        }
+
+        .package-image {
+
+            width: 100%;
+
+            height: 190px;
+
+            object-fit: cover;
+
+            background: #e2e8f0;
+        }
+
+        .no-image {
+
+            height: 190px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: #e2e8f0;
+
+            color: #64748b;
+
+            font-size: 40px;
+        }
+
+        .card-content {
+
+            padding: 20px;
+        }
+
+        .card-content h2 {
+
+            margin: 0 0 8px;
+
+            font-size: 20px;
+        }
+
+        .location {
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .description {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            min-height: 60px;
+        }
+
+        .details {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin: 15px 0;
+
+            padding: 12px 0;
+
+            border-top:
+                1px solid #e2e8f0;
+
+            border-bottom:
+                1px solid #e2e8f0;
+        }
+
+        .price {
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            color: #15803d;
+        }
+
+        .duration {
+
+            color: #475569;
+
+            font-size: 13px;
+        }
+
+        .status {
+
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            margin-bottom: 12px;
+        }
+
+        .active-status {
+
+            background: #dcfce7;
+
+            color: #166534;
+        }
+
+        .inactive-status {
+
+            background: #e2e8f0;
+
+            color: #475569;
+        }
+
+        .actions {
+
+            display: flex;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+        }
+
+        .empty {
+
+            background: white;
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+            border-radius: 12px;
+        }
+
+        .empty h2 {
+
+            margin-bottom: 10px;
+        }
+
+        @media(max-width:700px) {
+
+            .header {
+
+                padding: 15px;
+
+            }
+
+            .container {
+
+                padding: 15px;
+
+            }
+
+            .top {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+
+            }
+
+            .search {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h2>
+        KAVITHA CAPS
+    </h2>
+
+    <a
+        href="{% url 'erp_dashboard' %}"
+        class="btn back"
+    >
+        ← Dashboard
+    </a>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<div class="container">
+
+
+    <div class="top">
+
+        <div>
+
+            <h1>
+                Travel Packages
+            </h1>
+
+            <p>
+                Manage your Kavitha CAPS tour packages
+            </p>
+
+        </div>
+
+
+        <a
+            href="{% url 'add_package' %}"
+            class="btn add"
+        >
+            + Add Package
+        </a>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <input
+        type="text"
+        id="packageSearch"
+        class="search"
+        placeholder="Search package or location..."
+        onkeyup="searchPackages()"
+    >
+
+
+    <!-- PACKAGES -->
+
+    {% if packages %}
+
+    <div class="grid" id="packageGrid">
+
+
+        {% for package in packages %}
+
+        <div
+            class="card package-card"
+            data-search="
+                {{ package.name }}
+                {{ package.location }}
+                {{ package.description }}
+            "
+        >
+
+
+            <!-- IMAGE -->
+
+            {% if package.image %}
+
+                <img
+                    src="{{ package.image.url }}"
+                    class="package-image"
+                    alt="{{ package.name }}"
+                >
+
+            {% else %}
+
+                <div class="no-image">
+                    🗺️
+                </div>
+
+            {% endif %}
+
+
+            <div class="card-content">
+
+
+                <!-- NAME -->
+
+                <h2>
+                    {{ package.name }}
+                </h2>
+
+
+                <!-- LOCATION -->
+
+                <div class="location">
+
+                    📍 {{ package.location }}
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                {% if package.is_active %}
+
+                    <span class="status active-status">
+                        ACTIVE
+                    </span>
+
+                {% else %}
+
+                    <span class="status inactive-status">
+                        INACTIVE
+                    </span>
+
+                {% endif %}
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="description">
+
+                    {{ package.description|truncatechars:120 }}
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="details">
+
+                    <div>
+
+                        <small>
+                            Price
+                        </small>
+
+                        <div class="price">
+                            ₹{{ package.price }}
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <small>
+                            Duration
+                        </small>
+
+                        <div class="duration">
+                            {{ package.duration }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+
+                    <a
+                        href="{% url 'edit_package' package.id %}"
+                        class="btn edit"
+                    >
+                        ✏ Edit
+                    </a>
+
+
+                    <a
+                        href="{% url 'delete_package' package.id %}"
+                        class="btn delete"
+                        onclick="return confirm('Are you sure you want to delete this package?');"
+                    >
+                        🗑 Delete
+                    </a>
+
+
+                    {% if package.is_active %}
+
+                        <a
+                            href="{% url 'toggle_package' package.id %}"
+                            class="btn inactive"
+                        >
+                            Disable
+                        </a>
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'toggle_package' package.id %}"
+                            class="btn toggle"
+                        >
+                            Activate
+                        </a>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- EMPTY -->
+
+    <div class="empty">
+
+        <h2>
+            No Packages Found
+        </h2>
+
+        <p>
+            Add your first travel package to get started.
+        </p>
+
+        <br>
+
+        <a
+            href="{% url 'add_package' %}"
+            class="btn add"
+        >
+            + Add Package
+        </a>
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+function searchPackages() {
+
+    let input =
+        document.getElementById(
+            "packageSearch"
+        );
+
+    let filter =
+        input.value.toLowerCase();
+
+    let cards =
+        document.getElementsByClassName(
+            "package-card"
+        );
+
+
+    for (
+        let i = 0;
+        i < cards.length;
+        i++
+    ) {
+
+        let text =
+            cards[i]
+            .getAttribute("data-search")
+            .toLowerCase();
+
+
+        if (
+            text.includes(filter)
+        ) {
+
+            cards[i].style.display =
+                "";
+
+        } else {
+
+            cards[i].style.display =
+                "none";
+
+        }
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

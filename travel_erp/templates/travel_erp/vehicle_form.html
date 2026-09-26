@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        {% if vehicle %}
+            Edit Vehicle
+        {% else %}
+            Add Vehicle
+        {% endif %}
+    </title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 35px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .checkbox {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        button,
+        a {
+            padding: 11px 18px;
+            border-radius: 7px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+        }
+
+        .cancel {
+            background: #64748b;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>
+        KAVITHA CAPS
+    </h1>
+
+</div>
+
+
+<div class="container">
+
+    <h2>
+
+        {% if vehicle %}
+            Edit Vehicle
+        {% else %}
+            Add Vehicle
+        {% endif %}
+
+    </h2>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <label>
+            Vehicle Number
+        </label>
+
+        <input
+            type="text"
+            name="vehicle_number"
+            placeholder="Example: TN 69 AB 1234"
+            value="{{ vehicle.vehicle_number|default:'' }}"
+            required
+        >
+
+
+        <label>
+            Vehicle Type
+        </label>
+
+        <select
+            name="vehicle_type"
+            required
+        >
+
+            <option value="">
+                Select Vehicle Type
+            </option>
+
+            <option
+                value="Car"
+                {% if vehicle.vehicle_type == "Car" %}selected{% endif %}
+            >
+                Car
+            </option>
+
+            <option
+                value="Tempo Traveller"
+                {% if vehicle.vehicle_type == "Tempo Traveller" %}selected{% endif %}
+            >
+                Tempo Traveller
+            </option>
+
+            <option
+                value="Tourist Bus"
+                {% if vehicle.vehicle_type == "Tourist Bus" %}selected{% endif %}
+            >
+                Tourist Bus
+            </option>
+
+        </select>
+
+
+        <label>
+            Vehicle Model
+        </label>
+
+        <input
+            type="text"
+            name="model"
+            placeholder="Example: Toyota Innova"
+            value="{{ vehicle.model|default:'' }}"
+        >
+
+
+        <label>
+            Capacity
+        </label>
+
+        <input
+            type="number"
+            name="capacity"
+            min="1"
+            value="{{ vehicle.capacity|default:'1' }}"
+            required
+        >
+
+
+        <label>
+            Driver Name
+        </label>
+
+        <input
+            type="text"
+            name="driver_name"
+            value="{{ vehicle.driver_name|default:'' }}"
+        >
+
+
+        <label>
+            Driver Phone
+        </label>
+
+        <input
+            type="text"
+            name="driver_phone"
+            value="{{ vehicle.driver_phone|default:'' }}"
+        >
+
+
+        <label>
+
+            <input
+                type="checkbox"
+                class="checkbox"
+                name="is_available"
+                {% if not vehicle or vehicle.is_available %}
+                    checked
+                {% endif %}
+            >
+
+            Vehicle is available
+
+        </label>
+
+
+        <div class="buttons">
+
+            <button type="submit">
+
+                {% if vehicle %}
+                    Update Vehicle
+                {% else %}
+                    Save Vehicle
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'erp_vehicles' %}"
+                class="cancel"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>

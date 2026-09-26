@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Customer - Kavitha CAPS</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button,
+        .back {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 7px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+        }
+
+        .back {
+            background: #64748b;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h2>KAVITHA CAPS</h2>
+
+    <a
+        href="{% url 'erp_customers' %}"
+        class="back"
+    >
+        ← Customers
+    </a>
+
+</div>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Add New Customer</h2>
+
+        <p>
+            Enter customer information below.
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <label>
+                Customer Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter customer name"
+                required
+            >
+
+
+            <label>
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="Enter phone number"
+                required
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter email address"
+            >
+
+
+            <label>
+                Address
+            </label>
+
+            <textarea
+                name="address"
+                placeholder="Enter customer address"
+            ></textarea>
+
+
+            <div class="buttons">
+
+                <button type="submit">
+                    Save Customer
+                </button>
+
+                <a
+                    href="{% url 'erp_customers' %}"
+                    class="back"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

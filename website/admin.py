@@ -4,10 +4,10 @@ from .models import Enquiry
 
 @admin.register(Enquiry)
 class EnquiryAdmin(admin.ModelAdmin):
-
     list_display = (
         'name',
         'phone',
+        'email',
         'destination',
         'travel_date',
         'travellers',
@@ -18,6 +18,7 @@ class EnquiryAdmin(admin.ModelAdmin):
     list_filter = (
         'vehicle',
         'travel_date',
+        'destination',
         'created_at',
     )
 
@@ -29,12 +30,52 @@ class EnquiryAdmin(admin.ModelAdmin):
         'message',
     )
 
-    readonly_fields = (
-        'created_at',
-    )
+    date_hierarchy = 'travel_date'
 
     ordering = (
         '-created_at',
     )
 
-    list_per_page = 20
+    readonly_fields = (
+        'created_at',
+    )
+
+    fieldsets = (
+        (
+            'Customer Information',
+            {
+                'fields': (
+                    'name',
+                    'phone',
+                    'email',
+                )
+            }
+        ),
+        (
+            'Travel Information',
+            {
+                'fields': (
+                    'destination',
+                    'travel_date',
+                    'travellers',
+                    'vehicle',
+                )
+            }
+        ),
+        (
+            'Customer Message',
+            {
+                'fields': (
+                    'message',
+                )
+            }
+        ),
+        (
+            'System Information',
+            {
+                'fields': (
+                    'created_at',
+                )
+            }
+        ),
+    )

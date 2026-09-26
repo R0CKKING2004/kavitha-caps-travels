@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ module_name }} - Kavitha CAPS
+    </title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+        }
+
+
+        .container {
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+
+        .card {
+            background: white;
+
+            padding: 50px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.08);
+        }
+
+
+        h1 {
+            color: #172554;
+
+            margin-bottom: 15px;
+        }
+
+
+        p {
+            color: #64748b;
+
+            margin-bottom: 25px;
+        }
+
+
+        .back {
+            display: inline-block;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 20px;
+
+            border-radius: 7px;
+        }
+
+
+        .back:hover {
+            background: #1d4ed8;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <h1>
+            {{ module_name }}
+        </h1>
+
+
+        <p>
+            This ERP module is ready to be developed.
+        </p>
+
+
+        <a
+            href="{% url 'erp_dashboard' %}"
+            class="back"
+        >
+            ← Back to Dashboard
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

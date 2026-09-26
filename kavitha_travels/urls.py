@@ -1,14 +1,20 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from website import views
-
 
 urlpatterns = [
+
+    # Django Admin
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+
+    # Main Website
+    path('', include('website.urls')),
+
+    # Travel ERP
+    path('erp/', include('travel_erp.urls')),
+
 ]
 
 

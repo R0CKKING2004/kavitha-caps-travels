@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Booking - Kavitha CAPS</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 20px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .back {
+            background: #64748b;
+            color: white;
+        }
+
+        .save {
+            background: #2563eb;
+            color: white;
+        }
+
+        .cancel {
+            background: #64748b;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-family: Arial;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .amount-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .balance {
+            background: #dbeafe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        @media(max-width:700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h2>
+        KAVITHA CAPS
+    </h2>
+
+    <a
+        href="{% url 'erp_bookings' %}"
+        class="btn back"
+    >
+        ← Bookings
+    </a>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            Add New Booking
+        </h1>
+
+        <p class="subtitle">
+            Create a new customer travel booking.
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- CUSTOMER -->
+
+            <div class="section-title">
+                Customer & Package
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Customer
+                        <span class="required">*</span>
+                    </label>
+
+                    <select
+                        name="customer"
+                        required
+                    >
+
+                        <option value="">
+                            Select Customer
+                        </option>
+
+                        {% for customer in customers %}
+
+                        <option value="{{ customer.id }}">
+                            {{ customer.name }} - {{ customer.phone }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Package
+                    </label>
+
+                    <select
+                        name="package"
+                    >
+
+                        <option value="">
+                            Select Package
+                        </option>
+
+                        {% for package in packages %}
+
+                        <option
+                            value="{{ package.id }}"
+                            data-price="{{ package.price }}"
+                        >
+                            {{ package.name }} - ₹{{ package.price }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- TRAVEL DETAILS -->
+
+            <div class="section-title">
+                Travel Details
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Travel Date
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="date"
+                        name="travel_date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Return Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="return_date"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Number of Travellers
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        name="travellers"
+                        value="1"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Vehicle
+                        <span class="required">*</span>
+                    </label>
+
+                    <select
+                        name="vehicle"
+                        required
+                    >
+
+                        <option value="">
+                            Select Vehicle
+                        </option>
+
+                        <option value="Car">
+                            Car
+                        </option>
+
+                        <option value="Tempo Traveller">
+                            Tempo Traveller
+                        </option>
+
+                        <option value="Tourist Bus">
+                            Tourist Bus
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <div class="section-title">
+                Payment Details
+            </div>
+
+
+            <div class="amount-box">
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Total Amount
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            name="total_amount"
+                            id="totalAmount"
+                            value="0"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Advance Amount
+                        </label>
+
+                        <input
+                            type="number"
+                            name="advance_amount"
+                            id="advanceAmount"
+                            value="0"
+                            min="0"
+                            step="0.01"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="balance">
+
+                    Balance Amount:
+                    ₹<span id="balanceAmount">0.00</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="section-title">
+                Booking Status
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Booking Status
+                    </label>
+
+                    <select
+                        name="booking_status"
+                    >
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Confirmed">
+                            Confirmed
+                        </option>
+
+                        <option value="Cancelled">
+                            Cancelled
+                        </option>
+
+                        <option value="Completed">
+                            Completed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Payment Status
+                    </label>
+
+                    <select
+                        name="payment_status"
+                    >
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Partial">
+                            Partial
+                        </option>
+
+                        <option value="Paid">
+                            Paid
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Notes
+                    </label>
+
+                    <textarea
+                        name="notes"
+                        placeholder="Additional booking notes..."
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn save"
+                >
+                    💾 Save Booking
+                </button>
+
+
+                <a
+                    href="{% url 'erp_bookings' %}"
+                    class="btn cancel"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const totalAmount =
+    document.getElementById("totalAmount");
+
+const advanceAmount =
+    document.getElementById("advanceAmount");
+
+const balanceAmount =
+    document.getElementById("balanceAmount");
+
+
+function calculateBalance() {
+
+    let total =
+        parseFloat(totalAmount.value) || 0;
+
+    let advance =
+        parseFloat(advanceAmount.value) || 0;
+
+    let balance =
+        total - advance;
+
+    if (balance < 0) {
+        balance = 0;
+    }
+
+    balanceAmount.textContent =
+        balance.toFixed(2);
+}
+
+
+totalAmount.addEventListener(
+    "input",
+    calculateBalance
+);
+
+
+advanceAmount.addEventListener(
+    "input",
+    calculateBalance
+);
+
+
+</script>
+
+
+</body>
+
+</html>
